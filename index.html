@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignSpeak | ASL to Voice</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-icon">✋</span><span>Sign<span class="brand-accent">Speak</span></span></a>
+    <span class="top-note">ASL alphabet • Live translation</span>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow"><span class="live-dot"></span> COMMUNICATION MADE EASIER</div>
+      <h1>Turn hand signs into <span>spoken words.</span></h1>
+      <p>Show an ASL alphabet sign to your camera. SignSpeak recognises the letter, builds your message and can read it aloud.</p>
+    </section>
+
+    <section class="workspace">
+      <article class="panel camera-panel">
+        <div class="panel-heading">
+          <div><h2>Live camera</h2><p>Position one hand clearly inside the frame.</p></div>
+          <span class="status-pill" id="cameraStatus"><i></i> Camera off</span>
+        </div>
+        <div class="video-wrap">
+          <video id="inputVideo" playsinline></video>
+          <canvas id="outputCanvas"></canvas>
+          <div class="camera-placeholder" id="cameraPlaceholder">
+            <div class="camera-symbol">◎</div>
+            <strong>Your camera preview will appear here</strong>
+            <span>Allow camera access when your browser asks.</span>
+          </div>
+          <div class="camera-hint">ONE HAND · GOOD LIGHTING</div>
+        </div>
+        <div class="camera-actions">
+          <button class="btn btn-primary" id="startBtn">Start camera</button>
+          <button class="btn btn-secondary" id="stopBtn" disabled>Stop camera</button>
+        </div>
+        <p class="notice" id="message" role="status">Load the model, then start your camera.</p>
+      </article>
+
+      <article class="panel result-panel">
+        <div class="panel-heading"><div><h2>Recognised sign</h2><p>Your latest detected ASL letter.</p></div><span class="mini-label">LIVE RESULT</span></div>
+        <div class="prediction-card">
+          <div class="letter-display" id="letterDisplay">—</div>
+          <div class="prediction-info">
+            <span class="muted-label">DETECTED LETTER</span>
+            <strong id="predictionText">Waiting for a sign</strong>
+            <span id="confidenceText">Show your hand to begin</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-row"><h3>Your message</h3><span class="counter" id="letterCount">0 letters</span></div>
+        <div class="message-box" id="messageOutput" aria-live="polite"><span class="empty-message">Your recognised letters will appear here…</span></div>
+        <div class="message-actions">
+          <button class="btn btn-primary" id="speakBtn" disabled>▶ Speak message</button>
+          <button class="btn btn-secondary" id="spaceBtn">Add space</button>
+          <button class="btn btn-secondary icon-btn" id="deleteBtn" title="Delete last character" aria-label="Delete last character">⌫</button>
+          <button class="btn btn-secondary icon-btn" id="clearBtn" title="Clear message" aria-label="Clear message">↺</button>
+        </div>
+        <p class="small-help">Letters are added automatically when a sign stays steady. Briefly move your hand away before signing the same letter again.</p>
+      </article>
+    </section>
+
+    <section class="info-strip">
+      <div class="info-icon">ⓘ</div>
+      <div><strong>About this alphabet model</strong><p>This model recognises static ASL letters A–Y, excluding J. J and Z require movement and are not included in this model. Use a clear background and keep your hand visible.</p></div>
+    </section>
+    <footer>SignSpeak · A learning project for accessible communication</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
